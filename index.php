@@ -19,6 +19,7 @@ $conditions = [
     "papow" => ["%", "3,5"]
 ];
 $append = " ";
+echo "Task v1:" . PHP_EOL;
 echo $response->input($input)
     ->conditions($conditions)
     ->append($append)
@@ -32,6 +33,7 @@ $conditions = [
     "hateeho" => ["%", "2,7"]
 ];
 $append = "-";
+echo "Task v2:" . PHP_EOL;
 echo $response->input($input)
     ->conditions($conditions)
     ->append($append)
@@ -42,9 +44,10 @@ $input = [1, 10];
 $conditions = [
     "joff" => ["=", "1,4,9"],
     "tchoff" => [">", "5"],
-    "jofftchoff" => ["=", "1,4,9", ">", "5"]
+    "jofftchoff" => ["=", "9"]
 ];
 $append = "-";
+echo "Task v3:" . PHP_EOL;
 echo $response->input($input)
     ->conditions($conditions)
     ->append($append)

@@ -53,7 +53,7 @@ class ConditionChecker
     /**
      * 
      */
-    function isEqual($val1, $val2)
+    public function isEqual($val1, $val2)
     {
         if (count($val2) > 1) {
             foreach ($val2 as $val) {
@@ -69,7 +69,7 @@ class ConditionChecker
     /**
      * 
      */
-    function isNotEqual($val1, $val2)
+    public function isNotEqual($val1, $val2)
     {
         if (count($val2) > 1) {
             foreach ($val2 as $val) {
@@ -85,7 +85,7 @@ class ConditionChecker
     /**
      * 
      */
-    function isGreaterThanAndEqual($val1, $val2)
+    public function isGreaterThanAndEqual($val1, $val2)
     {
         if (count($val2) > 1) {
             foreach ($val2 as $val) {
@@ -101,7 +101,7 @@ class ConditionChecker
     /**
      * 
      */
-    function isLessThanAndEqual($val1, $val2)
+    public function isLessThanAndEqual($val1, $val2)
     {
         if (count($val2) > 1) {
             foreach ($val2 as $val) {
@@ -117,7 +117,7 @@ class ConditionChecker
     /**
      * 
      */
-    function isGreaterThan($val1, $val2)
+    public function isGreaterThan($val1, $val2)
     {
         if (count($val2) > 1) {
             foreach ($val2 as $val) {
@@ -133,7 +133,7 @@ class ConditionChecker
     /**
      * 
      */
-    function isLessThan($val1, $val2)
+    public function isLessThan($val1, $val2)
     {
         if (count($val2) > 1) {
             foreach ($val2 as $val) {
@@ -149,7 +149,7 @@ class ConditionChecker
     /**
      * 
      */
-    function isDivisibleBy($val1, $val2)
+    public function isDivisibleBy($val1, $val2)
     {
         if (count($val2) > 1) {
             $bool = true;

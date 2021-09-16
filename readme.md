@@ -84,3 +84,10 @@ Parameters and logic can be changed or added - it's best if your code would be e
 
 For example, more conditions can be added for new tasks (less than 3,
 between 5 and 11, is primary etc.), this should be easily added to the code.
+
+## Running Test Cases
+Run as the following to get the test results.
+
+```
+./vendor/bin/phpunit . --testdox --color
+```
