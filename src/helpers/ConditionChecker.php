@@ -8,6 +8,16 @@ class ConditionChecker
     private $value2;
     private $operator;
 
+    private $operatorToMethod = [
+        "="     => 'isEqual',
+        "!="    => 'isNotEqual',
+        ">="    => 'isGreaterThanAndEqual',
+        "<="    => 'isLessThanAndEqual',
+        ">"     => 'isGreaterThan',
+        "<"     => 'isLessThan',
+        "%"     => 'isDivisibleBy'
+    ];
+
     /**
      * 
      */
@@ -24,30 +34,11 @@ class ConditionChecker
      */
     function match(): bool
     {
-        switch ($this->operator) {
-            case "=":
-                return
-                    $this->isEqual($this->value1, $this->value2);
-            case "!=":
-                return
-                    $this->isNotEqual($this->value1, $this->value2);
-            case ">=":
-                return
-                    $this->isGreaterThanAndEqual($this->value1, $this->value2);
-            case "<=":
-                return
-                    $this->isLessThanAndEqual($this->value1, $this->value2);
-            case ">":
-                return
-                    $this->isGreaterThan($this->value1, $this->value2);
-            case "<":
-                return
-                    $this->isLessThan($this->value1, $this->value2);
-            case "%":
-                return $this->isDivisibleBy($this->value1, $this->value2);
-            default:
-                return false;
+        if ($method = $this->operatorToMethod[$this->operator]) {
+            return $this->$method($this->value1, $this->value2);
         }
+
+        throw new \Exception('Unknown Operator.');
     }
 
     /**
