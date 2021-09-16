@@ -7,52 +7,45 @@
 */
 require __DIR__ . '/vendor/autoload.php';
 
-use App\Helpers\ConverterService;
+use App\Response;
 
-// Task 
+$response = new Response();
+
+// Task 1
 $input = [1, 20];
-$condition = [
+$conditions = [
     "pa" => ["%", "3"],
     "pow" => ["%", "5"],
-    "papow" => ["%", "15"]
+    "papow" => ["%", "3,5"]
 ];
 $append = " ";
-$output = "";
+echo $response->input($input)
+    ->conditions($conditions)
+    ->append($append)
+    ->response();
 
-for ($i = $input[0]; $i <= $input[1]; $i++) {
-    $converter = new ConverterService();
-    $output .= $converter->conditions($condition)->input($i)->execute() . (($i < $input[1]) ? $append : "");
-}
-echo $output . PHP_EOL;
-
-// Task 
+// Task 2
 $input = [1, 15];
-$condition = [
+$conditions = [
     "hatee" => ["%", "2"],
     "ho" => ["%", "7"],
-    "hateeho" => ["%", "14"]
+    "hateeho" => ["%", "2,7"]
 ];
 $append = "-";
-$output = "";
+echo $response->input($input)
+    ->conditions($conditions)
+    ->append($append)
+    ->response();
 
-for ($i = $input[0]; $i <= $input[1]; $i++) {
-    $converter = new ConverterService();
-    $output .= $converter->conditions($condition)->input($i)->execute() . (($i < $input[1]) ? $append : "");
-}
-echo $output . PHP_EOL;
-
-// Task 
+// Task 3
 $input = [1, 10];
-$condition = [
+$conditions = [
     "joff" => ["=", "1,4,9"],
     "tchoff" => [">", "5"],
-    // "jofftchoff" => ["=", "1,4,9", ">", "5"]
+    "jofftchoff" => ["=", "1,4,9", ">", "5"]
 ];
 $append = "-";
-$output = "";
-
-for ($i = $input[0]; $i <= $input[1]; $i++) {
-    $converter = new ConverterService();
-    $output .= $converter->conditions($condition)->input($i)->execute() . (($i < $input[1]) ? $append : "");
-}
-echo $output . PHP_EOL;
+echo $response->input($input)
+    ->conditions($conditions)
+    ->append($append)
+    ->response();

@@ -4,17 +4,28 @@ declare(strict_types=1);
 
 namespace App\Helpers;
 
+use App\Helpers\ConditionChecker;
+
 class ConverterService
 {
-    private $condition_arr;
+    private $conditions;
     private $input;
+    private $conditionChecker;
+
+    /**
+     * 
+     */
+    public function __construct(ConditionChecker $conditionChecker)
+    {
+        $this->conditionChecker = $conditionChecker;
+    }
 
     /**
      * 
      */
     public function conditions(array $conditions): ConverterService
     {
-        $this->condition_arr = $conditions;
+        $this->conditions = $conditions;
         return $this;
     }
 
@@ -30,7 +41,7 @@ class ConverterService
     /**
      * 
      */
-    public function execute(): string
+    public function run(): string
     {
         return $this->apply($this->input);
     }
@@ -41,34 +52,14 @@ class ConverterService
     private function apply(): string
     {
         $res = "{$this->input}";
-        foreach ($this->condition_arr as $str => $con) {
-            if ($this->num_cond($con)) {
+        foreach ($this->conditions as $str => $condition) {
+            if ($this->conditionChecker
+                ->set($this->input, $condition)
+                ->match()
+            ) {
                 $res = $str;
             }
         }
         return $res;
-    }
-
-    function num_cond($con): bool|int
-    {
-        $val = intval($con[1]);
-        switch ($con[0]) {
-            case "=":
-                return $this->input == $val;
-            case "!=":
-                return $this->input != $val;
-            case ">=":
-                return $this->input >= $val;
-            case "<=":
-                return $this->input <= $val;
-            case ">":
-                return $this->input > $val;
-            case "<":
-                return $this->input < $val;
-            case "%":
-                return ($this->input % $val) == 0;
-            default:
-                return false;
-        }
     }
 }
