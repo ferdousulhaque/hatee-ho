@@ -15,7 +15,8 @@ class ConditionChecker
         "<="    => 'isLessThanAndEqual',
         ">"     => 'isGreaterThan',
         "<"     => 'isLessThan',
-        "%"     => 'isDivisibleBy'
+        "%"     => 'isDivisibleBy',
+        "<>"    => 'isBetweenRange'
     ];
 
     /**
@@ -150,5 +151,15 @@ class ConditionChecker
             return $bool;
         }
         return ($val1 % $val2[0]) == 0;
+    }
+
+    /**
+     * 
+     */
+    public function isBetweenRange($val1, $val2)
+    {
+        return (
+            ($val1 > $val2[0]) &&
+            ($val1 < $val2[0]));
     }
 }
