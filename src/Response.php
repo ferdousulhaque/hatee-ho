@@ -48,14 +48,21 @@ class Response implements ResponseInterface
     public function response(): string
     {
         $output = "";
-        $conditionChecker = new ConditionChecker;
         for ($i = $this->input[0]; $i <= $this->input[1]; $i++) {
-            $converter = new ConverterService($conditionChecker);
-            $output .= $converter->input($i)
-                ->conditions($this->conditions)
-                ->run() .
-                (($i < $this->input[1]) ? $this->append : "");
+            $out = $i;
+            $append = (($i < $this->input[1]) ? $this->append : "");
+            foreach ($this->conditions as $condition) {
+                $testPass = true;
+                foreach ($condition["logic"] as $logic) {
+                    $testPass &= $logic->match($i);
+                }
+                if ($testPass && ($out == $i)) {
+                    $out = $condition["print"];
+                }
+            }
+            $output .= $out . $append;
         }
+
         return $output . PHP_EOL;
     }
 }
