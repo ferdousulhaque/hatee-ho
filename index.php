@@ -26,7 +26,7 @@ echo "Task v1:" . PHP_EOL;
 echo $response->input($input)
     ->conditions($conditions)
     ->append($append)
-    ->response();
+    ->response() . PHP_EOL;
 
 
 
@@ -42,7 +42,7 @@ echo "Task v2:" . PHP_EOL;
 echo $response->input($input)
     ->conditions($conditions)
     ->append($append)
-    ->response();
+    ->response() . PHP_EOL;
 
 // // Task 3
 $input = [1, 10];
@@ -56,4 +56,4 @@ echo "Task v3:" . PHP_EOL;
 echo $response->input($input)
     ->conditions($conditions)
     ->append($append)
-    ->response();
+    ->response() . PHP_EOL;

@@ -63,6 +63,6 @@ class Response implements ResponseInterface
             $output .= $out . $append;
         }
 
-        return $output . PHP_EOL;
+        return $output;
     }
 }
