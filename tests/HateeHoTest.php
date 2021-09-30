@@ -8,7 +8,7 @@ use App\Helpers\isDivisibleBy;
 use App\Response;
 use PHPUnit\Framework\TestCase;
 
-class testHateeHo extends TestCase
+class HateeHoTest extends TestCase
 {
     /**
      * 

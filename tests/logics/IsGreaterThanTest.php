@@ -5,7 +5,7 @@ namespace App\Test\Logics;
 use App\Helpers\isGreaterThan;
 use PHPUnit\Framework\TestCase;
 
-class TestIsGreaterThan extends TestCase
+class IsGreaterThanTest extends TestCase
 {
     /**
      * @dataProvider dataProviderForLogicMethodTest
