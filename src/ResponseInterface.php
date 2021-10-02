@@ -4,8 +4,8 @@ namespace App;
 
 interface ResponseInterface
 {
-    function input(array $input);
-    function conditions(array $conditions);
-    function append(string $append);
-    function response();
+    public function input(array $input);
+    public function conditions(array $conditions);
+    public function append(string $append);
+    public function response();
 }

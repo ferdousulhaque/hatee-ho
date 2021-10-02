@@ -15,18 +15,12 @@ class Response implements ResponseInterface
     private $conditions;
     private $append;
 
-    /**
-     * 
-     */
     public function input(array $input)
     {
         $this->input = $input;
         return $this;
     }
 
-    /**
-     * 
-     */
     public function conditions(array $conditions)
     {
         $this->conditions = $conditions;
