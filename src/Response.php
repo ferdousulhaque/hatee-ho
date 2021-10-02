@@ -4,26 +4,37 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Helpers\ConditionChecker;
-use App\Helpers\ConverterService;
 use App\ResponseInterface;
+use App\StringGenerator\Config;
 
 class Response implements ResponseInterface
 {
+    /**
+     * @var int[]
+     */
+    private array $input;
 
-    private $input;
-    private $conditions;
+    /**
+     * @var Config[]
+     */
+    private array $configs;
+
     private $append;
 
-    public function input(array $input)
+    /**
+     * @param int[] $input
+     */
+    public function setInput(array $input): self
     {
         $this->input = $input;
+
         return $this;
     }
 
-    public function conditions(array $conditions)
+    public function setConfigs(array $configs)
     {
-        $this->conditions = $conditions;
+        $this->configs = $configs;
+
         return $this;
     }
 
@@ -45,13 +56,13 @@ class Response implements ResponseInterface
         for ($i = $this->input[0]; $i <= $this->input[1]; $i++) {
             $out = $i;
             $append = (($i < $this->input[1]) ? $this->append : "");
-            foreach ($this->conditions as $condition) {
+            foreach ($this->configs as $config) {
                 $testPass = true;
-                foreach ($condition["logic"] as $logic) {
-                    $testPass &= $logic->match($i);
+                foreach ($config->getMatchers() as $matcher) {
+                    $testPass &= $matcher->match($i);
                 }
                 if ($testPass && ($out == $i)) {
-                    $out = $condition["print"];
+                    $out = $config->getWord();
                 }
             }
             $output .= $out . $append;
