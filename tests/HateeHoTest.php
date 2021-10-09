@@ -2,11 +2,11 @@
 
 namespace Tests;
 
+use App\GenerateString;
 use App\Matcher\GreaterThan;
 use App\Matcher\InArray;
 use App\Matcher\DivisibleBy;
 use App\StringGenerator\Config;
-use App\Response;
 use PHPUnit\Framework\TestCase;
 
 class HateeHoTest extends TestCase
@@ -21,7 +21,7 @@ class HateeHoTest extends TestCase
      */
     public function setUp(): void
     {
-        $this->responder = new Response();
+        $this->responder = new GenerateString();
     }
 
     /**
@@ -33,7 +33,7 @@ class HateeHoTest extends TestCase
             ->setInput($input)
             ->setConfigs($conditions)
             ->append($append)
-            ->response();
+            ->generate();
         $this->assertEquals($expectation, $result);
     }
 

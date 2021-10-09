@@ -7,13 +7,13 @@
 */
 require __DIR__ . '/vendor/autoload.php';
 
+use App\GenerateString;
 use App\Matcher\DivisibleBy;
 use App\Matcher\GreaterThan;
 use App\Matcher\InArray;
-use App\Response;
 use App\StringGenerator\Config;
 
-$response = new Response();
+$response = new GenerateString();
 
 // Task 1
 $input = [1, 20];
@@ -27,8 +27,7 @@ echo "Task v1:" . PHP_EOL;
 echo $response->setInput($input)
     ->setConfigs($configs)
     ->append(" ")
-    ->response() . PHP_EOL
-;
+    ->generate() . PHP_EOL;
 
 // Task 2
 $input = [1, 15];
@@ -41,8 +40,7 @@ echo "Task v2:" . PHP_EOL;
 echo $response->setInput($input)
     ->setConfigs($configs)
     ->append('-')
-    ->response() . PHP_EOL
-;
+    ->generate() . PHP_EOL;
 
 // Task 3
 $input = [1, 10];
@@ -56,5 +54,4 @@ echo "Task v3:" . PHP_EOL;
 echo $response->setInput($input)
     ->setConfigs($configs)
     ->append('-')
-    ->response() . PHP_EOL
-;
+    ->generate() . PHP_EOL;

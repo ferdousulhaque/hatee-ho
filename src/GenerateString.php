@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\ResponseInterface;
 use App\StringGenerator\Config;
 
-class Response implements ResponseInterface
+class GenerateString
 {
     /**
      * @var int[]
@@ -50,24 +49,36 @@ class Response implements ResponseInterface
     /**
      * 
      */
-    public function response(): string
+    public function generate(): string
     {
-        $output = "";
+        $generatedString = "";
+
         for ($i = $this->input[0]; $i <= $this->input[1]; $i++) {
-            $out = $i;
             $append = (($i < $this->input[1]) ? $this->append : "");
-            foreach ($this->configs as $config) {
-                $testPass = true;
-                foreach ($config->getMatchers() as $matcher) {
-                    $testPass &= $matcher->match($i);
-                }
-                if ($testPass && ($out == $i)) {
-                    $out = $config->getWord();
-                }
-            }
-            $output .= $out . $append;
+            $generatedString .= $this->matchConditionAndGetTheWord($i) . $append;
         }
 
-        return $output;
+        return $generatedString;
+    }
+
+    /**
+     * 
+     */
+    public function matchConditionAndGetTheWord(int $i): string|int
+    {
+        $out = $i;
+        foreach ($this->configs as $config) {
+
+            $testPass = true;
+
+            foreach ($config->getMatchers() as $matcher) {
+                $testPass &= $matcher->match($i);
+            }
+
+            if ($testPass && ($out == $i)) {
+                $out = $config->getWord();
+            }
+        }
+        return $out;
     }
 }
