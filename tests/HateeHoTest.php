@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests;
 
-use App\GenerateString;
+use App\StringGenerator;
 use App\Matcher\GreaterThan;
 use App\Matcher\InArray;
 use App\Matcher\DivisibleBy;
@@ -21,7 +23,7 @@ class HateeHoTest extends TestCase
      */
     public function setUp(): void
     {
-        $this->responder = new GenerateString();
+        $this->responder = new StringGenerator();
     }
 
     /**

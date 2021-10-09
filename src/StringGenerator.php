@@ -6,7 +6,7 @@ namespace App;
 
 use App\StringGenerator\Config;
 
-class GenerateString
+class StringGenerator
 {
     /**
      * @var int[]
