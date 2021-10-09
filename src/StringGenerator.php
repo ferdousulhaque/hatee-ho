@@ -5,80 +5,45 @@ declare(strict_types=1);
 namespace App;
 
 use App\StringGenerator\Config;
+use App\StringGenerator\Range;
 
 class StringGenerator
 {
     /**
-     * @var int[]
+     * @param Config[] $configs
      */
-    private array $input;
-
-    /**
-     * @var Config[]
-     */
-    private array $configs;
-
-    private $append;
-
-    /**
-     * @param int[] $input
-     */
-    public function setInput(array $input): self
-    {
-        $this->input = $input;
-
-        return $this;
-    }
-
-    public function setConfigs(array $configs)
-    {
-        $this->configs = $configs;
-
-        return $this;
-    }
-
-    /**
-     * 
-     */
-    public function append(string $append)
-    {
-        $this->append = $append;
-        return $this;
-    }
-
-    /**
-     * 
-     */
-    public function generate(): string
+    public function generate(array $configs, Range $range, string $separator): string
     {
         $generatedString = "";
 
-        for ($i = $this->input[0]; $i <= $this->input[1]; $i++) {
-            $append = (($i < $this->input[1]) ? $this->append : "");
-            $generatedString .= $this->matchConditionAndGetTheWord($i) . $append;
+        for ($i = $range->getMin(); $i <= $range->getMax(); $i++) {
+            $append = (($i < $range->getMax()) ? $separator : "");
+            $generatedString .= $this->matchConditionAndGetTheWord($i, $configs) . $append;
         }
 
         return $generatedString;
     }
 
     /**
+     * @param Config[] $configs
      * 
+     * @return int|string 
      */
-    public function matchConditionAndGetTheWord(int $i): string|int
+    private function matchConditionAndGetTheWord(int $i, array $configs)
     {
         $out = $i;
-        foreach ($this->configs as $config) {
-
-            $testPass = true;
+        foreach ($configs as $config) {
+            $matched = true;
 
             foreach ($config->getMatchers() as $matcher) {
-                $testPass &= $matcher->match($i);
+                $matched &= $matcher->match($i);
             }
 
-            if ($testPass && ($out == $i)) {
+            if ($matched && ($out == $i)) {
                 $out = $config->getWord();
             }
         }
+
         return $out;
     }
 }
