@@ -10,6 +10,16 @@ use App\StringGenerator\Range;
 class StringGenerator
 {
     /**
+     * @params MatcherInterface[] $matchers
+     */
+    private array $matchers;
+
+    public function __construct(array $matchers)
+    {
+        $this->matchers = $matchers;
+    }
+
+    /**
      * @param Config[] $configs
      */
     public function generate(array $configs, Range $range, string $separator): string
@@ -32,11 +42,12 @@ class StringGenerator
     private function matchConditionAndGetTheWord(int $i, array $configs)
     {
         $out = $i;
+
         foreach ($configs as $config) {
             $matched = true;
 
-            foreach ($config->getMatchers() as $matcher) {
-                $matched &= $matcher->match($i);
+            foreach ($config->getMap() as $matcherIndex => $against) {
+                $matched &= $this->matchers[$matcherIndex]->match($i, $against);
             }
 
             if ($matched && ($out == $i)) {

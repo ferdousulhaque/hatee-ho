@@ -14,15 +14,39 @@ use App\StringGenerator;
 use App\StringGenerator\Config;
 use App\StringGenerator\Range;
 
-$response = new StringGenerator();
+$matchers = [
+    'divisible_by' => new DivisibleBy(),
+    'in_array' => new InArray(),
+    'greater_than' => new GreaterThan(),
+];
+
+$response = new StringGenerator($matchers);
 
 // Task 1
 echo "Task v1:" . PHP_EOL;
 echo $response->generate([
-    new Config([new DivisibleBy(3), new DivisibleBy(5)], 'papow'),
-    new Config([new DivisibleBy(3)], 'pa'),
-    new Config([new DivisibleBy(5)], 'pow'),
+    new Config(
+        [
+            'divisible_by' =>  3,
+            'divisible_by' => 5,
+        ], 
+        'papow'
+    ),
+    new Config(
+        [
+            'divisible_by' =>  3,
+        ], 
+        'pa'
+    ),
+    new Config(
+        [
+            'divisible_by' => 5,
+        ], 
+        'pow'
+    ),
 ], new Range(1, 20), ' ');
+
+exit(1);
 
 // Task 2
 $configs = [

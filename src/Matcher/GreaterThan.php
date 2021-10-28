@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace App\Matcher;
 
+use InvalidArgumentException;
+
 class GreaterThan implements MatcherInterface
 {
-    private $againstValue;
-
-    public function __construct(int $againstValue)
-    {
-        $this->againstValue = $againstValue;
-    }
-
-    public function match(int $value): bool
+    /**
+     * @param int $against
+     */
+    public function match(int $value, $against): bool
     { 
-        return $value > $this->againstValue;
+        if (!is_int($against)) {
+            throw new InvalidArgumentException('$aganst value has to be of type integer');
+        }
+
+        return $value > $against;
     }
 }
