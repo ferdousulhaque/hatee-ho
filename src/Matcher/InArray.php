@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace App\Matcher;
 
+use InvalidArgumentException;
+
 class InArray implements MatcherInterface
 {
-    private array $againstValue;
-
-    public function __construct(array $againstValue)
+    public function match(int $value, $against): bool
     {
-        $this->againstValue = $againstValue;
-    }
+        if (!is_array($against)) {
+            throw new InvalidArgumentException('Parameter $against has to be of type array of integers');
+        }
 
-    public function match(int $value): bool
-    {
-        return in_array($value, $this->againstValue);
+        return in_array($value, $against);
     }
 }

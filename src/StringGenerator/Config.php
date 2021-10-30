@@ -8,28 +8,19 @@ use App\Matcher\MatcherInterface;
 
 class Config
 {
-    /**
-     * @var MatcherInterface[]
-     */
-    private array $matchers;
+    private array $map;
 
     private string $word;
 
-    /**
-     * @param MatcherInterface[] $matchers
-     */
-    public function __construct(array $matchers, string $word)
+    public function __construct(array $map, string $word)
     {
-        $this->matchers = $matchers;     
+        $this->map = $map;     
         $this->word = $word;
     }
 
-    /**
-     * @return MatcherInterface[]
-     */
-    public function getMatchers(): array
+    public function getMap(): array
     {
-        return $this->matchers;
+        return $this->map;
     }
 
     public function getWord(): string
