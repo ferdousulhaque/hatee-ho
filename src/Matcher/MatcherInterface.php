@@ -6,5 +6,5 @@ namespace App\Matcher;
 
 interface MatcherInterface
 {
-    public function match(int $value): bool;
+    public function match(int $value, $against): bool;
 }

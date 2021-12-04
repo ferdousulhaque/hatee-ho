@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace App\Matcher;
 
+use InvalidArgumentException;
+
 class DivisibleBy implements MatcherInterface
 {
-    private int $againstValue;
-
-    public function __construct(int $againstValue)
+    /**
+     * @param int $against
+     */
+    public function match(int $value, $against): bool
     {
-        $this->againstValue = $againstValue;
-    }
+        if (!is_int($against)) {
+            throw new InvalidArgumentException('$aganst value has to be of type integer');
+        }
 
-    public function match(int $value): bool
-    {
-        return ($value % $this->againstValue) === 0;
+        return ($value % $against) === 0;
     }
 }
