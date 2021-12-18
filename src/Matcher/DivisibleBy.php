@@ -13,8 +13,16 @@ class DivisibleBy implements MatcherInterface
      */
     public function match(int $value, $against): bool
     {
-        if (!is_int($against)) {
-            throw new InvalidArgumentException('$aganst value has to be of type integer');
+        if (!is_int($against) && !is_array($against)) {
+            throw new InvalidArgumentException('Parameter $against has to be of type array of integers or integer');
+        }
+
+        if (is_array($against)) {
+            $against_multiply = 1;
+            foreach ($against as $each) {
+                $against_multiply *= $each;
+            }
+            $against = $against_multiply;
         }
 
         return ($value % $against) === 0;

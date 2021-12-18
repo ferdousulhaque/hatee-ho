@@ -14,8 +14,8 @@ class GreaterThanTest extends TestCase
      */
     public function testMatch(int $condition, int $value): void
     {
-        $box = new GreaterThan($condition);
-        $result = $box->match($value);
+        $box = new GreaterThan();
+        $result = $box->match($value, $condition);
 
         $this->assertTrue($result);
     }

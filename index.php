@@ -27,42 +27,69 @@ echo "Task v1:" . PHP_EOL;
 echo $response->generate([
     new Config(
         [
-            'divisible_by' =>  3,
-            'divisible_by' => 5,
-        ], 
+            'divisible_by' => [3, 5]
+        ],
         'papow'
     ),
     new Config(
         [
             'divisible_by' =>  3,
-        ], 
+        ],
         'pa'
     ),
     new Config(
         [
             'divisible_by' => 5,
-        ], 
+        ],
         'pow'
-    ),
+    )
 ], new Range(1, 20), ' ');
-
-exit(1);
+echo PHP_EOL;
 
 // Task 2
-$configs = [
-    new Config([new DivisibleBy(2), new DivisibleBy(7)], 'hateeho'),
-    new Config([new DivisibleBy(7)], 'ho'),
-    new Config([new DivisibleBy(2)], 'hatee'),
-];
 echo "Task v2:" . PHP_EOL;
-echo $response->generate($configs, new Range(1, 15), '-');
+echo $response->generate([
+    new Config(
+        [
+            'divisible_by' => [2, 7]
+        ],
+        'hateeho'
+    ),
+    new Config(
+        [
+            'divisible_by' => 7
+        ],
+        'ho'
+    ),
+    new Config(
+        [
+            'divisible_by' => 2
+        ],
+        'hatee'
+    )
+], new Range(1, 15), '-');
+echo PHP_EOL;
 
 // Task 3
-$configs = [
-    new Config([new InArray([1, 4, 9]), new GreaterThan(5)], 'jofftchoff'),
-    new Config([new InArray([1, 4, 9])], 'joff'),
-    new Config([new GreaterThan(5)], 'tchoff'),
-];
-
 echo "Task v3:" . PHP_EOL;
-echo $response->generate($configs, new Range(1, 10), '-');
+echo $response->generate([
+    new Config(
+        [
+            'in_array' => [1, 4, 9],
+            'greater_than' => 5
+        ],
+        'jofftchoff'
+    ),
+    new Config(
+        [
+            'in_array' => [1, 4, 9]
+        ],
+        'joff'
+    ),
+    new Config(
+        [
+            'greater_than' => 5
+        ],
+        'tchoff'
+    )
+], new Range(1, 10), '-');
