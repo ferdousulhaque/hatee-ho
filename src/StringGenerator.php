@@ -47,7 +47,7 @@ class StringGenerator
             $matched = true;
 
             foreach ($config->getMap() as $matcherIndex => $against) {
-                $matched &= $this->matchers[$matcherIndex]->match($i, $against);
+                $matched = $matched && $this->matchers[$matcherIndex]->match($i, $against);
             }
 
             if ($matched && ($out == $i)) {
